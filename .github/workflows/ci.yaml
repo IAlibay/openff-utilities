@@ -59,6 +59,7 @@ jobs:
     - name: Run mypy
       shell: bash -l {0}
       run: |
+        echo y | mypy --install-types
         mypy --show-error-codes --namespace-packages -p "openff.utilities"
 
     - name: Run unit tests

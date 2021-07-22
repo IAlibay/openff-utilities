@@ -9,7 +9,7 @@ from typing import Optional
 from openff.utilities.exceptions import MissingOptionalDependency
 
 
-def has_package(package_name: str):
+def has_package(package_name: str) -> bool:
     """
     Helper function to generically check if a Python package is installed.
     Intended to be used to check for optional dependencies.
@@ -65,7 +65,7 @@ def requires_package(package_name: str):
 
             try:
                 importlib.import_module(package_name)
-            except (ImportError, ModuleNotFoundError):
+            except ImportError:
                 raise MissingOptionalDependency(library_name=package_name)
             except Exception as e:
                 raise e
@@ -80,7 +80,7 @@ def requires_package(package_name: str):
 def has_executable(program_name: str) -> bool:
     import os
 
-    def _is_executable(fpath):
+    def _is_executable(fpath: str) -> bool:
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
     fpath, fname = os.path.split(program_name)

@@ -7,6 +7,14 @@ from openff.utilities.utilities import (
     temporary_cd,
 )
 
+__all__ = [
+    "get_data_file_path",
+    "has_executable",
+    "has_package",
+    "requires_package",
+    "temporary_cd",
+]
+
 # Handle versioneer
 versions = get_versions()
 __version__ = versions["version"]
