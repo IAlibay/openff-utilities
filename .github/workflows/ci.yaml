@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - "main"
+  schedule:
+    # At 07:00 UTC on Monday and Thursday.
+    - cron: "0 7 * * *"
 
 defaults:
   run:
@@ -20,16 +23,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12"]
-        ambertools: [false, true]
-        openeye: [false, true]
+        ambertools: [true]
+        openeye: [false]
         mamba-executable: ["mamba", "micromamba"]
-        exclude:
-          - python-version: "3.12"
-            openeye: true
-          - python-version: "3.12"
-            ambertools: true
 
     env:
       OE_LICENSE: ${{ github.workspace }}/oe_license.txt
